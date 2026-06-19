@@ -101,6 +101,8 @@ Copy-Item (Join-Path $root "oxt\Jobs.xcu")         $stage
 Copy-Item (Join-Path $root "src\python\stockdata.py") $stage
 Copy-Item (Join-Path $root "oxt\META-INF") $stage -Recurse
 Copy-Item (Join-Path $root "oxt\description") $stage -Recurse
+Copy-Item (Join-Path $root "oxt\icons") $stage -Recurse
+Copy-Item (Join-Path $root "oxt\registration") $stage -Recurse
 
 # --- zip into .oxt -----------------------------------------------------------
 $oxt = Join-Path $dist "StockData.oxt"

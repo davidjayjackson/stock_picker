@@ -58,6 +58,8 @@ cp "$root/oxt/Jobs.xcu" "$stage/"
 cp "$root/src/python/stockdata.py" "$stage/"
 cp -r "$root/oxt/META-INF" "$stage/"
 cp -r "$root/oxt/description" "$stage/"
+cp -r "$root/oxt/icons" "$stage/"
+cp -r "$root/oxt/registration" "$stage/"
 
 oxt="$dist/StockData.oxt"
 echo "Packing $oxt..."

@@ -2,16 +2,24 @@
 <description xmlns="http://openoffice.org/extensions/description/2006"
              xmlns:xlink="http://www.w3.org/1999/xlink">
   <identifier value="com.davidjackson.stockpicker"/>
-  <version value="0.1.0"/>
+  <version value="1.0.0"/>
   <display-name>
     <name lang="en-US">StockData &#8211; Yahoo Finance for Calc</name>
   </display-name>
   <publisher>
     <name xlink:href="https://github.com/davidjayjackson" lang="en-US">David Jackson</name>
   </publisher>
+  <icon>
+    <default xlink:href="icons/icon.png"/>
+  </icon>
   <extension-description>
     <src lang="en-US" xlink:href="description/desc_en.txt"/>
   </extension-description>
+  <registration>
+    <simple-license accept-by="user" suppress-on-update="true">
+      <license-text xlink:href="registration/LICENSE" lang="en-US"/>
+    </simple-license>
+  </registration>
   <dependencies>
     <!-- Requires a LibreOffice build new enough to host Python add-ins -->
     <OpenOffice.org-minimal-version value="4.1"

@@ -141,6 +141,32 @@ declarative descriptions onto a Python add-in function discovered via
 interface introspection. It is purely cosmetic — the function and all its
 arguments work normally.
 
+## Publishing to extensions.libreoffice.org
+
+The `.oxt` produced by the build **is** the distributable package — that is the
+file you upload. It already carries everything the gallery needs:
+
+- `description.xml` — identifier, version (`1.0.0`), display name, publisher,
+  icon, and a click-through MIT license (`registration/simple-license`) shown
+  on install.
+- `icons/icon.png` — 42×42 icon for the Extension Manager and the listing.
+- `registration/LICENSE`, `description/desc_en.txt` — license text and blurb.
+
+Steps:
+
+1. Run `.\build.ps1` to produce `dist/StockData.oxt`.
+2. Sign in at <https://extensions.libreoffice.org/> and add a new project:
+   title, summary, full description, and a category (e.g. *Calc* +
+   *Business/Finance*).
+3. Add a release: upload the `.oxt`, set the **compatible LibreOffice
+   versions**, choose the **MIT** license, and attach **screenshots** (the
+   spilled-table view works well).
+4. Submit — listings go through moderator review before they appear publicly.
+
+Bump `<version>` in `oxt/description.xml` for each release. To offer in-app
+update notifications, host an update feed and add an `<update-information>`
+element pointing at it.
+
 ## How it works
 
 - `XStockData.idl` declares the UNO interface `stockdata(string, string,
