@@ -1,0 +1,7 @@
+StockData adds the STOCKDATA() worksheet function to LibreOffice Calc.
+
+=STOCKDATA("AAPL"; "2024-01-01"; "2024-03-01")
+
+It returns a table of historical daily prices (Date, Open, High, Low, Close,
+Adj Close, Volume) pulled from Yahoo Finance, similar to Excel's STOCKHISTORY.
+Enter it as an array formula (Ctrl+Shift+Enter) or let it spill automatically.

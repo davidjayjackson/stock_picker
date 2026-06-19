@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
+  <!-- Compiled type library generated from src/idl/XStockData.idl -->
+  <manifest:file-entry
+      manifest:media-type="application/vnd.sun.star.uno-typelibrary;type=RDB"
+      manifest:full-path="StockData.rdb"/>
+
+  <!-- Python UNO component implementing the add-in -->
+  <manifest:file-entry
+      manifest:media-type="application/vnd.sun.star.uno-component;type=Python"
+      manifest:full-path="stockdata.py"/>
+
+  <!-- Calc function registration / display metadata -->
+  <manifest:file-entry
+      manifest:media-type="application/vnd.sun.star.configuration-data"
+      manifest:full-path="CalcAddIns.xcu"/>
+
+  <!-- Document-open Job that wires up the auto-expand listener -->
+  <manifest:file-entry
+      manifest:media-type="application/vnd.sun.star.configuration-data"
+      manifest:full-path="Jobs.xcu"/>
+</manifest:manifest>

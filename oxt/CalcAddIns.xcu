@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data
+    xmlns:oor="http://openoffice.org/2001/registry"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    oor:name="CalcAddIns" oor:package="org.openoffice.Office">
+  <node oor:name="AddInInfo">
+    <node oor:name="com.davidjackson.stockpicker.StockDataImpl" oor:op="replace">
+      <node oor:name="AddInFunctions">
+
+        <node oor:name="stockdata" oor:op="replace">
+          <prop oor:name="DisplayName">
+            <value xml:lang="en-US">STOCKDATA</value>
+          </prop>
+          <prop oor:name="Description">
+            <value xml:lang="en-US">Fetches historical daily stock data from Yahoo Finance as a table (Date, Open, High, Low, Close, Adj Close, Volume).</value>
+          </prop>
+          <prop oor:name="Category">
+            <value>Add-In</value>
+          </prop>
+          <prop oor:name="CompatibilityName">
+            <value xml:lang="en-US">STOCKDATA</value>
+          </prop>
+
+          <node oor:name="Parameters">
+            <node oor:name="symbol" oor:op="replace">
+              <prop oor:name="DisplayName">
+                <value xml:lang="en-US">Symbol</value>
+              </prop>
+              <prop oor:name="Description">
+                <value xml:lang="en-US">Ticker symbol, e.g. "AAPL".</value>
+              </prop>
+            </node>
+            <node oor:name="startDate" oor:op="replace">
+              <prop oor:name="DisplayName">
+                <value xml:lang="en-US">Start Date</value>
+              </prop>
+              <prop oor:name="Description">
+                <value xml:lang="en-US">First day to include (YYYY-MM-DD or a date cell).</value>
+              </prop>
+            </node>
+            <node oor:name="endDate" oor:op="replace">
+              <prop oor:name="DisplayName">
+                <value xml:lang="en-US">End Date</value>
+              </prop>
+              <prop oor:name="Description">
+                <value xml:lang="en-US">Last day to include, inclusive (YYYY-MM-DD or a date cell).</value>
+              </prop>
+            </node>
+          </node>
+
+        </node>
+
+      </node>
+    </node>
+  </node>
+</oor:component-data>

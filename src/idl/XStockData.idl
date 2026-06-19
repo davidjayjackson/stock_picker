@@ -1,0 +1,37 @@
+#ifndef __com_davidjackson_stockpicker_XStockData_idl__
+#define __com_davidjackson_stockpicker_XStockData_idl__
+
+#include <com/sun/star/uno/XInterface.idl>
+
+module com { module davidjackson { module stockpicker {
+
+    /**
+     * Interface exposing the spreadsheet add-in function STOCKDATA.
+     *
+     * The function returns a two-dimensional array (sequence of rows, each row
+     * being a sequence of cell values).  The first row contains the column
+     * headers, the remaining rows the daily OHLCV data fetched from Yahoo
+     * Finance.
+     */
+    interface XStockData
+    {
+        /**
+         * Fetch historical daily stock data.
+         *
+         * @param symbol     the ticker symbol, e.g. "AAPL".
+         * @param startDate  the first day to include (YYYY-MM-DD, or a date
+         *                    cell reference / serial number).
+         * @param endDate    the last day to include (inclusive).
+         * @return           a 2D array: header row + one row per trading day
+         *                   with columns Date, Open, High, Low, Close,
+         *                   Adj Close, Volume.
+         */
+        sequence< sequence< any > > stockdata(
+            [in] string symbol,
+            [in] string startDate,
+            [in] string endDate );
+    };
+
+}; }; };
+
+#endif
