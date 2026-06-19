@@ -1,5 +1,7 @@
 # StockData — a LibreOffice Calc extension
 
+![StockData](logos/logo-banner.png)
+
 A LibreOffice Calc extension that adds a `STOCKDATA` worksheet function, the
 Calc equivalent of Excel's `STOCKHISTORY`. It pulls historical daily stock
 data from Yahoo Finance.
