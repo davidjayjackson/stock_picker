@@ -115,7 +115,7 @@ $sb = New-Object System.Drawing.SolidBrush $SUBTLE
 $gb = New-Object System.Drawing.SolidBrush $GREEN
 $g.DrawString("Stock", $f1, $wb, 300, 92)
 $stockW = $g.MeasureString("Stock", $f1).Width
-$g.DrawString("Data", $f1, $gb, (300 + $stockW - 20), 92)
+$g.DrawString("Picker", $f1, $gb, (300 + $stockW), 92)
 $g.DrawString("Yahoo Finance for LibreOffice Calc", $f2, $sb, 306, 196)
 $bmp.Save((Join-Path $out "logo-banner.png"), [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $bmp.Dispose()
