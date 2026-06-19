@@ -275,18 +275,99 @@ SPREADSHEET_SERVICE = "com.sun.star.sheet.SpreadsheetDocument"
 _ATTACHED = set()
 
 _CALL_RE = re.compile(r"STOCKDATA\s*\((.*)\)\s*$", re.IGNORECASE | re.DOTALL)
+_SCRATCH_SHEET = "_stockdata_scratch"
+
+
+def _split_args(text):
+    """Split a formula argument list on top-level ; or , separators.
+
+    Respects double-quoted strings and nested parentheses so expressions
+    like DATE(2026,1,1) or TODAY() survive intact.
+    """
+    args, cur, depth, in_str = [], [], 0, False
+    i = 0
+    while i < len(text):
+        ch = text[i]
+        if in_str:
+            cur.append(ch)
+            if ch == '"':
+                if i + 1 < len(text) and text[i + 1] == '"':  # escaped ""
+                    cur.append('"')
+                    i += 2
+                    continue
+                in_str = False
+        elif ch == '"':
+            in_str = True
+            cur.append(ch)
+        elif ch == '(':
+            depth += 1
+            cur.append(ch)
+        elif ch == ')':
+            depth -= 1
+            cur.append(ch)
+        elif ch in ";," and depth == 0:
+            args.append("".join(cur).strip())
+            cur = []
+        else:
+            cur.append(ch)
+        i += 1
+    if cur:
+        args.append("".join(cur).strip())
+    return args
 
 
 def _parse_call(formula):
-    """Pull (symbol, start, end) out of a STOCKDATA formula string."""
+    """Return the three raw argument expressions of a STOCKDATA formula."""
     match = _CALL_RE.search(formula)
     if not match:
         return None
-    parts = re.split(r"[;,]", match.group(1))
-    vals = [p.strip().strip('"').strip() for p in parts]
-    if len(vals) < 3 or not vals[0]:
+    tokens = _split_args(match.group(1))
+    if len(tokens) < 3 or not tokens[0]:
         return None
-    return vals[0], vals[1], vals[2]
+    return tokens[:3]
+
+
+def _is_string_literal(token):
+    return len(token) >= 2 and token.startswith('"') and token.endswith('"')
+
+
+def _resolve_args(doc, tokens):
+    """Turn raw argument expressions into concrete values.
+
+    String literals ("IBM") are used verbatim. Anything else — TODAY(), a
+    cell reference, DATE(...), a number — is evaluated in a throwaway sheet
+    so live formulas work in the auto-expand path just as they do when the
+    function is called directly by Calc.
+    """
+    if all(_is_string_literal(t) for t in tokens):
+        return [t[1:-1] for t in tokens]
+
+    sheets = doc.Sheets
+    if sheets.hasByName(_SCRATCH_SHEET):
+        sheets.removeByName(_SCRATCH_SHEET)
+    sheets.insertNewByName(_SCRATCH_SHEET, sheets.Count)
+    scratch = sheets.getByName(_SCRATCH_SHEET)
+    try:
+        values = []
+        for token in tokens:
+            if _is_string_literal(token):
+                values.append(token[1:-1])
+                continue
+            cell = scratch.getCellByPosition(0, 0)
+            cell.setFormula("=" + token)
+            doc.calculateAll()
+            # A formula cell reports getType() == FORMULA, so detect the
+            # result kind by value: a date/number has a non-zero serial,
+            # while a text result (e.g. a symbol) yields 0.
+            number = cell.getValue()
+            if number != 0.0:
+                values.append(number)            # numeric / date serial
+            else:
+                values.append(cell.getString())
+        return values
+    finally:
+        if sheets.hasByName(_SCRATCH_SHEET):
+            sheets.removeByName(_SCRATCH_SHEET)
 
 
 def _coerce(value):
@@ -346,17 +427,18 @@ class AutoExpandListener(unohelper.Base, XModifyListener):
             below = sheet.getCellByPosition(addr.Column, addr.Row + 1)
             if right.getString() or below.getString():
                 continue
-            parsed = _parse_call(cell.getFormula())
-            if parsed:
-                targets.append((addr, parsed))
+            tokens = _parse_call(cell.getFormula())
+            if tokens:
+                targets.append((addr, tokens))
 
         if not targets:
             return
 
         self._busy = True
         try:
-            for addr, (symbol, start, end) in targets:
+            for addr, tokens in targets:
                 try:
+                    symbol, start, end = _resolve_args(self.doc, tokens)
                     rows = _fetch(symbol, start, end)
                 except Exception as exc:
                     rows = (("STOCKDATA error: %s" % exc,),)

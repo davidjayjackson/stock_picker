@@ -9,7 +9,13 @@ data from Yahoo Finance.
 ```
 
 The function takes three arguments — **stock symbol**, **start date**, and
-**end date** — and returns all the daily data columns as a table:
+**end date** — and returns all the daily data columns as a table. Dates can be
+text (`"2024-01-01"`), date cells, or live formulas like `TODAY()`:
+
+```
+=STOCKDATA("AAPL", "2024-01-01", TODAY())
+```
+
 
 | Date | Open | High | Low | Close | Adj Close | Volume |
 |------|------|------|-----|-------|-----------|--------|

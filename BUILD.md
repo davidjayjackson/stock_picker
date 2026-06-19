@@ -80,9 +80,14 @@ In any Calc cell:
 =STOCKDATA("MSFT"; "2024-01-01"; "2024-02-01")
 ```
 
-Dates may be ISO strings (`YYYY-MM-DD`), common regional formats, or
-references to date cells. Errors (bad symbol, no network, empty range) appear
-as a single `STOCKDATA error: …` cell.
+Dates may be ISO strings (`YYYY-MM-DD`), common regional formats, references
+to date cells, or live formulas such as `TODAY()` or `DATE(2026,1,1)` — these
+work in both the live array-formula and auto-expand forms. Errors (bad symbol,
+no network, empty range) appear as a single `STOCKDATA error: …` cell.
+
+```
+=STOCKDATA("AAPL", "2024-01-01", TODAY())
+```
 
 ### Getting the whole table
 
