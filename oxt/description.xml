@@ -4,7 +4,7 @@
   <identifier value="com.davidjackson.stockpicker"/>
   <version value="1.0.0"/>
   <display-name>
-    <name lang="en-US">StockData &#8211; Yahoo Finance for Calc</name>
+    <name lang="en-US">Stock Picker &#8211; Yahoo Finance for Calc</name>
   </display-name>
   <publisher>
     <name xlink:href="https://github.com/davidjayjackson" lang="en-US">David Jackson</name>

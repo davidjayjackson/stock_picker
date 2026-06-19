@@ -1,6 +1,6 @@
-# StockData — a LibreOffice Calc extension
+# Stock Picker — a LibreOffice Calc extension
 
-![StockData](logos/logo-banner.png)
+![Stock Picker](logos/logo-banner.png)
 
 A LibreOffice Calc extension that adds a `STOCKDATA` worksheet function, the
 Calc equivalent of Excel's `STOCKHISTORY`. It pulls historical daily stock
@@ -46,7 +46,7 @@ stock_picker/
 │   ├── CalcAddIns.xcu          Function Wizard registration
 │   ├── Jobs.xcu                document-open Job (auto-expand)
 │   └── META-INF/manifest.xml
-├── build.ps1 / build.sh        compile the IDL and pack dist/StockData.oxt
+├── build.ps1 / build.sh        compile the IDL and pack dist/StockPicker.oxt
 ├── tools/                      headless UNO tests
 └── BUILD.md                    build, install, and usage guide
 ```
@@ -55,7 +55,7 @@ stock_picker/
 
 See **[BUILD.md](BUILD.md)**. In short: install the LibreOffice SDK, run
 `build.ps1` (Windows) or `build.sh` (Linux/macOS) to produce
-`dist/StockData.oxt`, then install it with `unopkg add`. The add-in itself uses
+`dist/StockPicker.oxt`, then install it with `unopkg add`. The add-in itself uses
 only the Python standard library — no third-party packages.
 
 ## How it works

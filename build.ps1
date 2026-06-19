@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Build the StockData LibreOffice Calc add-in (.oxt).
+    Build the Stock Picker LibreOffice Calc add-in (.oxt).
 
 .DESCRIPTION
     1. Compiles src/idl/XStockData.idl into a UNO type library (StockData.rdb)
@@ -8,7 +8,7 @@
        (legacy) tool.
     2. Stages the .oxt payload (description.xml, manifest, python component,
        config and the generated .rdb).
-    3. Zips the staging folder into dist/StockData.oxt.
+    3. Zips the staging folder into dist/StockPicker.oxt.
 
     Requires the LibreOffice SDK. Point -SdkDir / -OfficeDir at your install,
     or set the LO_SDK_HOME / LO_PROGRAM environment variables.
@@ -105,7 +105,7 @@ Copy-Item (Join-Path $root "oxt\icons") $stage -Recurse
 Copy-Item (Join-Path $root "oxt\registration") $stage -Recurse
 
 # --- zip into .oxt -----------------------------------------------------------
-$oxt = Join-Path $dist "StockData.oxt"
+$oxt = Join-Path $dist "StockPicker.oxt"
 Write-Host "Packing $oxt..." -ForegroundColor Cyan
 if (Test-Path $oxt) { Remove-Item $oxt }
 # Compress the *contents* of the staging dir to the archive root.

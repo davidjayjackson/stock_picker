@@ -1,4 +1,4 @@
-# Building & installing the StockData add-in
+# Building & installing the Stock Picker add-in
 
 `STOCKDATA()` is a LibreOffice Calc add-in function, the Calc equivalent of
 Excel's `STOCKHISTORY`:
@@ -25,7 +25,7 @@ stock_picker/
 │   └── META-INF/manifest.xml   # package manifest
 ├── build.ps1                   # Windows build
 ├── build.sh                    # Linux/macOS build
-└── dist/StockData.oxt          # produced by the build
+└── dist/StockPicker.oxt          # produced by the build
 ```
 
 ## Prerequisites
@@ -57,12 +57,12 @@ Linux/macOS:
 LO_PROGRAM=/usr/lib/libreoffice/program ./build.sh
 ```
 
-Both produce `dist/StockData.oxt`.
+Both produce `dist/StockPicker.oxt`.
 
 ## Install
 
 ```powershell
-& "C:\Program Files\LibreOffice\program\unopkg.exe" add --force dist\StockData.oxt
+& "C:\Program Files\LibreOffice\program\unopkg.exe" add --force dist\StockPicker.oxt
 ```
 
 Or in the GUI: **Tools ▸ Extension Manager ▸ Add…**, pick the `.oxt`, then
@@ -154,7 +154,7 @@ file you upload. It already carries everything the gallery needs:
 
 Steps:
 
-1. Run `.\build.ps1` to produce `dist/StockData.oxt`.
+1. Run `.\build.ps1` to produce `dist/StockPicker.oxt`.
 2. Sign in at <https://extensions.libreoffice.org/> and add a new project:
    title, summary, full description, and a category (e.g. *Calc* +
    *Business/Finance*).

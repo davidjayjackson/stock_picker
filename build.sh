@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Build the StockData LibreOffice Calc add-in (.oxt) on Linux/macOS.
+# Build the Stock Picker LibreOffice Calc add-in (.oxt) on Linux/macOS.
 #
 # Requires the LibreOffice SDK. Set LO_PROGRAM to the office "program" dir
 # (containing types.rdb and unoidl-write) and, for the legacy path, LO_SDK_HOME.
@@ -61,7 +61,7 @@ cp -r "$root/oxt/description" "$stage/"
 cp -r "$root/oxt/icons" "$stage/"
 cp -r "$root/oxt/registration" "$stage/"
 
-oxt="$dist/StockData.oxt"
+oxt="$dist/StockPicker.oxt"
 echo "Packing $oxt..."
 ( cd "$stage" && zip -r -q "$oxt" . )
 

@@ -1,4 +1,4 @@
-StockData adds the STOCKDATA() worksheet function to LibreOffice Calc.
+Stock Picker adds the STOCKDATA() worksheet function to LibreOffice Calc.
 
 =STOCKDATA("AAPL"; "2024-01-01"; "2024-03-01")
 
